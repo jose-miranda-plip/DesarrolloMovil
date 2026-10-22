@@ -3,76 +3,156 @@ package com.example.myapplication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.myapplication.ui.theme.MyApplicationTheme
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
             MyApplicationTheme {
-                var nombre by remember { mutableStateOf("") }
-                var modal by remember { mutableStateOf(false) }
-                var terminos by remember { mutableStateOf(false) }
-                fun abrirModal(){ modal = true}
-                fun cerrarModal(){ modal = false}
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.img),
-                        contentDescription = "Es una tuerca",
-                        modifier = Modifier
-                            .width(250.dp)
-                            .height(175.dp)
-                    )
+                var mostrarLogin by remember { mutableStateOf(false) }
 
-
-                    OutlinedTextField(
-                        value = nombre,
-                        onValueChange = { nombre = it },
-                        label = { Text("Ingresa nombre") },
+                if (mostrarLogin) {
+                    PantallaLogin(
+                        volverInicio = { mostrarLogin = false }
                     )
-                    Checkbox(
-                        checked = terminos,
-                        onCheckedChange = { terminos = it}
-                    )
-                    Button(onClick = { abrirModal() }){ Text(text = "Enviar")}
-                }
-                if(modal){
-                    AlertDialog(
-                        onDismissRequest = { },
-                        title = { Text("Confirmacion") },
-                        text = { Text("Formulario enviado correctamente") },
-                        confirmButton = {
-                            Button(onClick = { cerrarModal() }) { Text("OK") }
-                        }
+                } else {
+                    PantallaInicio(
+                        abrirLogin = { mostrarLogin = true }
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun PantallaInicio(abrirLogin: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.img),
+            contentDescription = "Imagen de tuerca",
+            modifier = Modifier.size(160.dp)
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "CENAMAD",
+            style = MaterialTheme.typography.headlineLarge,
+            fontWeight = FontWeight.Bold
+        )
+
+        Text(
+            text = "Conocimiento sobre madera",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = abrirLogin,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Iniciar sesión")
+        }
+    }
+}
+
+@Composable
+fun PantallaLogin(volverInicio: () -> Unit) {
+    var correo by remember { mutableStateOf("") }
+    var clave by remember { mutableStateOf("") }
+    var mostrarError by remember { mutableStateOf(false) }
+    var inicioCorrecto by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Iniciar sesión",
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            value = correo,
+            onValueChange = {
+                correo = it
+                mostrarError = false
+            },
+            label = { Text("Correo electrónico") },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedTextField(
+            value = clave,
+            onValueChange = {
+                
+                clave = it
+                mostrarError = false
+            },
+            label = { Text("Contraseña") },
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
+        )
+
+        if (mostrarError) {
+            Text(
+                text = "Completa el correo y la contraseña.",
+                color = MaterialTheme.colorScheme.error
+            )
+        }
+
+        if (inicioCorrecto) {
+            Text("Datos ingresados correctamente.")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                if (correo.isBlank() || clave.isBlank()) {
+                    mostrarError = true
+                    inicioCorrecto = false
+                } else {
+                    mostrarError = false
+                    inicioCorrecto = true
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Ingresar")
+        }
+
+        TextButton(onClick = volverInicio) {
+            Text("Volver al inicio")
         }
     }
 }
