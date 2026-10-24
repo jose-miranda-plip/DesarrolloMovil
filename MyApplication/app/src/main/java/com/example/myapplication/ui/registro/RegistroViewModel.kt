@@ -10,15 +10,48 @@ import com.example.myapplication.util.Validaciones
 
 class RegistroViewModel(application: Application) : AndroidViewModel(application) {
 
-        private val dao = AppDatabase.getDatabase(application).usuarioDao()
+    private val dao = AppDatabase.getDatabase(application).usuarioDao()
 
-        var nombre by mutableStateOf("")
-            private set
-        var nombreError by mutableStateOf<String?>(null)
-            private set
+    var nombre by mutableStateOf("")
+        private set
+    var nombreError by mutableStateOf<String?>(null)
+        private set
 
-        fun onNombreChange(valor: String) {
-            nombre = valor
-            nombreError = Validaciones.validarNombre(valor)
+    var email by mutableStateOf("")
+        private set
+    var emailError by mutableStateOf<String?>(null)
+        private set
+
+    var password by mutableStateOf("")
+        private set
+    var passwordError by mutableStateOf<String?>(null)
+        private set
+
+    var confirmacion by mutableStateOf("")
+        private set
+    var confirmacionError by mutableStateOf<String?>(null)
+        private set
+
+    fun onNombreChange(valor: String) {
+        nombre = valor
+        nombreError = Validaciones.validarNombre(valor)
+    }
+
+    fun onEmailChange(valor: String) {
+        email = valor
+        emailError = Validaciones.validarEmail(valor)
+    }
+
+    fun onPasswordChange(valor: String) {
+        password = valor
+        passwordError = Validaciones.validarPassword(valor)
+        if (confirmacion.isNotEmpty()) {
+            confirmacionError = Validaciones.validarConfirmacion(valor, confirmacion)
         }
     }
+
+    fun onConfirmacionChange(valor: String) {
+        confirmacion = valor
+        confirmacionError = Validaciones.validarConfirmacion(password, valor)
+    }
+}
