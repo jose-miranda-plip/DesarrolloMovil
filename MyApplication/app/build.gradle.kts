@@ -1,16 +1,23 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+    id("org.jetbrains.kotlin.android")
+}
+val propiedadesLocales = Properties().apply {
+    val archivo = rootProject.file("local.properties")
+    if (archivo.exists()) {
+        archivo.inputStream().use { load(it) }
+    }
 }
 
 android {
     namespace = "com.example.myapplication"
-    compileSdk {
-        version = release(37) {
-            minorApiLevel = 1
-        }
-    }
+
+    compileSdk = 37
+
 
     defaultConfig {
         applicationId = "com.example.myapplication"
@@ -20,13 +27,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders["MAPS_API_KEY"] =
+            propiedadesLocales.getProperty("MAPS_API_KEY", "")
     }
 
     buildTypes {
         release {
-            optimization {
-                enable = false
-            }
+            isMinifyEnabled = false
         }
     }
     compileOptions {
@@ -35,6 +43,12 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
     }
 }
 
@@ -61,4 +75,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    implementation(libs.play.services.location)
+    implementation(libs.maps.compose)
+    implementation(libs.kotlin.stdlib)
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.10")
 }
