@@ -25,6 +25,6 @@ object Validaciones {
     }
 
     fun validarConfirmacion(password: String, confirmacion: String): String? {
-        return if (password != confirmacion) "La contraseña no es correcta" else null
+        return if (password != confirmacion) "Las contraseñas no coinciden" else null
     }
 }
