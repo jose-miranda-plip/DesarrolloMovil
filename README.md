@@ -4,8 +4,8 @@ Aplicación móvil Android desarrollada con Kotlin y Jetpack Compose para la asi
 **DSY1105 – Desarrollo de Aplicaciones Móviles** (Evaluación Parcial 2).
 
 ## Integrantes
-- [Christopher Miranda1] – Registro y base de datos
-- [Jose Miranda 2] – Login, perfil y recursos nativos
+- José Miranda – Login, perfil y recursos nativos
+- Christopher Miranda – Registro y base de datos
 
 ## Descripción
 CENAMAD entrega información sobre tipos de madera y permite a los usuarios crear una cuenta,
