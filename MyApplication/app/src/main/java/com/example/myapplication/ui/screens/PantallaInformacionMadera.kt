@@ -70,6 +70,14 @@ fun PantallaInformacionMadera(
             }
         }
 
+        Text(
+            text = "Video informativo",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold
+        )
+
+        VideoMadera()
+
         Button(
             onClick = abrirGps,
             modifier = Modifier.fillMaxWidth()
