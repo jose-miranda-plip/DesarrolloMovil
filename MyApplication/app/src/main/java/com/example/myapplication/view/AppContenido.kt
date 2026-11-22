@@ -9,6 +9,8 @@ import com.example.myapplication.view.screens.PantallaRegistro
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.viewmodel.LoginViewModel
 import com.example.myapplication.view.screens.PantallaPerfil
+import com.example.myapplication.view.screens.PantallaApi
+import com.example.myapplication.viewmodel.ApiViewModel
 
 private enum class Pantalla {
     INICIO,
@@ -16,18 +18,22 @@ private enum class Pantalla {
     LOGIN,
     REGISTRO,
     GPS,
-    PERFIL
+    PERFIL,
+
+    API
 }
 
 @Composable
 fun AppContenido() {
     val loginViewModel: LoginViewModel = viewModel()
     var pantallaActual by remember { mutableStateOf(Pantalla.INICIO) }
+    val apiViewModel: ApiViewModel = viewModel()
 
     when (pantallaActual) {
         Pantalla.INICIO -> PantallaInicio(
             abrirInformacion = { pantallaActual = Pantalla.MADERA },
-            abrirLogin = { pantallaActual = Pantalla.LOGIN }
+            abrirLogin = { pantallaActual = Pantalla.LOGIN },
+            abrirApi = { pantallaActual = Pantalla.API}
         )
 
         Pantalla.LOGIN -> PantallaLogin(
@@ -49,6 +55,11 @@ fun AppContenido() {
 
         Pantalla.GPS -> PantallaGps(
             volverInformacion = { pantallaActual = Pantalla.MADERA }
+        )
+
+        Pantalla.API -> PantallaApi(
+            volverInicio = { pantallaActual = Pantalla.INICIO},
+            viewModel = apiViewModel
         )
 
         Pantalla.PERFIL -> {

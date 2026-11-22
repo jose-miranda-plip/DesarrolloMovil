@@ -14,7 +14,8 @@ import com.example.myapplication.R
 @Composable
 fun PantallaInicio(
     abrirInformacion: () -> Unit,
-    abrirLogin: () -> Unit
+    abrirLogin: () -> Unit,
+    abrirApi: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -56,6 +57,13 @@ fun PantallaInicio(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Iniciar sesión")
+        }
+
+        OutlinedButton(
+            onClick = abrirApi,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Probar API")
         }
     }
 }

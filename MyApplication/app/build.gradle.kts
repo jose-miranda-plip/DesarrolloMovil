@@ -81,4 +81,6 @@ dependencies {
     implementation(libs.maps.compose)
     implementation(libs.kotlin.stdlib)
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.10")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
 }
