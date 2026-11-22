@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.screens
+package com.example.myapplication.view.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -24,8 +24,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.myapplication.ui.login.LoginViewModel
-import com.example.myapplication.data.Usuario
+import com.example.myapplication.viewmodel.LoginViewModel
+import com.example.myapplication.model.Usuario
 
 @Composable
 fun PantallaLogin(

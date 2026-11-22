@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.screens
+package com.example.myapplication.view.screens
 
 import android.Manifest
 import android.content.Context
@@ -31,7 +31,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
-import com.example.myapplication.data.Usuario
+import com.example.myapplication.model.Usuario
 import java.io.File
 import java.io.FileOutputStream
 

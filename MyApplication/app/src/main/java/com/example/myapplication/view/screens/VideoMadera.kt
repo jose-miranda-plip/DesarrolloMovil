@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.screens
+package com.example.myapplication.view.screens
 
 import android.net.Uri
 import android.widget.MediaController

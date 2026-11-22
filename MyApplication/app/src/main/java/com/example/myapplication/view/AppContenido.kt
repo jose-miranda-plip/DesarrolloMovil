@@ -1,14 +1,14 @@
-package com.example.myapplication.ui
+package com.example.myapplication.view
 
 import androidx.compose.runtime.*
-import com.example.myapplication.ui.screens.PantallaInformacionMadera
-import com.example.myapplication.ui.screens.PantallaInicio
-import com.example.myapplication.ui.screens.PantallaLogin
-import com.example.myapplication.ui.screens.PantallaGps
-import com.example.myapplication.ui.screens.PantallaRegistro
+import com.example.myapplication.view.screens.PantallaInformacionMadera
+import com.example.myapplication.view.screens.PantallaInicio
+import com.example.myapplication.view.screens.PantallaLogin
+import com.example.myapplication.view.screens.PantallaGps
+import com.example.myapplication.view.screens.PantallaRegistro
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.myapplication.ui.login.LoginViewModel
-import com.example.myapplication.ui.screens.PantallaPerfil
+import com.example.myapplication.viewmodel.LoginViewModel
+import com.example.myapplication.view.screens.PantallaPerfil
 
 private enum class Pantalla {
     INICIO,

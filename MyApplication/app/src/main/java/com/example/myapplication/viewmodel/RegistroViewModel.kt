@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.registro
+package com.example.myapplication.viewmodel
 
 import android.app.Application
 import android.database.sqlite.SQLiteConstraintException
@@ -8,7 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.AppDatabase
-import com.example.myapplication.data.Usuario
+import com.example.myapplication.model.Usuario
 import com.example.myapplication.util.Seguridad
 import com.example.myapplication.util.Validaciones
 import kotlinx.coroutines.delay
